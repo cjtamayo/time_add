@@ -3,7 +3,7 @@ __author__ = 'Christian Tamayo'
 timetime = []
 
 while True:
-    timething = raw_input('what is your time? Enter time, done, remove or reset\n')
+    timething = raw_input('What is your time? Enter time, "done", "remove" or "reset"\n')
     if timething.upper() == 'DONE':
         break
     elif timething.upper() == 'RESET':
@@ -12,7 +12,7 @@ while True:
         try:
             timetime.pop()
         except:
-            print 'Nothing to remove'
+            print 'Nothing to remove\n'
             continue
     else:
         try:
@@ -43,5 +43,6 @@ def time_add(time_list):
         return str(new_tot_mins) + ':' + new_new_tm + ':' + secs
     else:
         return str(tot_mins) + ':' + secs
+
 print
 print 'Total time is: ' + time_add(timetime)
