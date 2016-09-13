@@ -4,11 +4,11 @@ timetime = []
 
 while True:
     timething = raw_input('what is your time? Enter time, done, remove or reset\n')
-    if timething == 'done':
+    if timething.upper() == 'DONE':
         break
-    elif timething == 'reset':
+    elif timething.upper() == 'RESET':
         timetime = []
-    elif timething == 'remove':
+    elif timething.upper() == 'REMOVE':
         try:
             timetime.pop()
         except:
@@ -27,7 +27,6 @@ while True:
 def time_add(time_list):
     tot_mins = 0
     tot_secs = 0
-    total = 0
     for times in timetime:
         split = times.split(':')
         tot_mins += int(split[0])
@@ -44,5 +43,5 @@ def time_add(time_list):
         return str(new_tot_mins) + ':' + new_new_tm + ':' + secs
     else:
         return str(tot_mins) + ':' + secs
-
-print time_add(timetime)
+print
+print 'Total time is: ' + time_add(timetime)
