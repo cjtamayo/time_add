@@ -1,33 +1,34 @@
 __author__ = 'Christian Tamayo'
 
-timetime = []
-
-while True:
-    timething = raw_input('What is your time? Enter time, "done", "remove" or "reset"\n')
-    if timething.upper() == 'DONE':
-        break
-    elif timething.upper() == 'RESET':
-        timetime = []
-    elif timething.upper() == 'REMOVE':
-        try:
-            timetime.pop()
-        except:
-            print 'Nothing to remove\n'
-            continue
-    else:
-        try:
-            split = timething.split(':')
-            assert type(int(split[0])) == int
-            assert type(int(split[1])) == int
-            timetime.append(timething)
-        except Exception as e:
-            print 'Please enter a valid time'
-            continue
+def loopstart():
+    timetime = []
+    while True:
+        timething = raw_input('What is your time? Enter time, "done", "remove" or "reset"\n')
+        if timething.upper() == 'DONE':
+            break
+        elif timething.upper() == 'RESET':
+            timetime = []
+        elif timething.upper() == 'REMOVE':
+            try:
+                timetime.pop()
+            except:
+                print 'Nothing to remove\n'
+                continue
+        else:
+            try:
+                split = timething.split(':')
+                assert type(int(split[0])) == int
+                assert type(int(split[1])) == int
+                timetime.append(timething)
+            except Exception as e:
+                print 'Please enter a valid time'
+                continue
+    return timetime
 
 def time_add(time_list):
     tot_mins = 0
     tot_secs = 0
-    for times in timetime:
+    for times in time_list:
         split = times.split(':')
         tot_mins += int(split[0])
         tot_secs += int(split[1])
@@ -44,5 +45,5 @@ def time_add(time_list):
     else:
         return str(tot_mins) + ':' + secs
 
-print
-print 'Total time is: ' + time_add(timetime)
+if __name__ == '__main__':
+    print '\nTotal time is: ' + time_add(loopstart())
