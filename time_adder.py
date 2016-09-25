@@ -35,7 +35,7 @@ def time_add(time_list):
     tot_mins += tot_secs/60
     secs = str(tot_secs%60)
     if len(secs) == 1:
-        secs = secs + '0'
+        secs = '0' + secs
     if tot_mins >= 60:
         new_tot_mins = tot_mins/60
         new_new_tm = str(tot_mins - new_tot_mins*60)
