@@ -45,5 +45,8 @@ def time_add(time_list):
     else:
         return str(tot_mins) + ':' + secs
 
-if __name__ == '__main__':
+def main():
     print '\nTotal time is: ' + time_add(loopstart())
+
+if __name__ == '__main__':
+    main()
