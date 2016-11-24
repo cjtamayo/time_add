@@ -18,7 +18,7 @@ class Timer(object):
     def time_total(self):
         tot_mins = 0
         tot_secs = 0
-        for times in time_list:
+        for times in self.times:
             split = times.split(':')
             tot_mins += int(split[0])
             tot_secs += int(split[1])
