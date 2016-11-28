@@ -5,11 +5,32 @@ class Timer(object):
     def __init__(self):
         self.times = []
 
+    def validate(self,listo):
+        if type(listo) == str:
+            listo = [listo]
+        try:
+            for time in listo:
+                split = time.split(':')
+                assert type(int(split[0])) == int
+                assert type(int(split[1])) == int
+                assert len(split[1]) == 2
+            return True
+        except:
+            return False
+
     def show_times(self):
-        print self.times
+        for time in self.times:
+            print time
 
     def time_add(self,time):
-        self.times.append(time)
+        if self.validate(time):
+            if type(time) == str:
+                self.times.append(time)
+            else:
+                for times in time:
+                    self.times.append(times)
+        else:
+            return 'Please enter valid time(s)'
 
     def time_remove(self, out_time):
         if out_time in self.times:
@@ -36,5 +57,23 @@ class Timer(object):
             return str(tot_mins) + ':' + secs
 
     def time_subtract(self, time1, time2):
-        #this needs to be filled!
-        pass
+        if self.validate([time1,time2]):
+            if time1 == time2:
+                return 0
+            else:
+                time1_tot = int(time1.split(':')[0]) * 60 + int(time1.split(':')[1])
+                time2_tot = int(time2.split(':')[0]) * 60 + int(time2.split(':')[1])
+                new_time = time1_tot - time2_tot
+                if new_time < 0:
+                    return 'Time 1 must be greater than Time 2'
+                new_time_min = str(new_time / 60)
+                new_time_secs = str(new_time % 60)
+                if len(new_time_secs) == 1:
+                    new_time_secs = '0' + new_time_secs
+                return '{}:{}'.format(new_time_min, new_time_secs)
+        else:
+            return 'please enter valid times'
+
+
+
+
