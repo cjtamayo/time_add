@@ -5,7 +5,7 @@ class Timer(object):
     def __init__(self):
         self.times = []
 
-    def validate(self,listo):
+    def validator(self,listo):
         if type(listo) == str:
             listo = [listo]
         try:
@@ -13,14 +13,21 @@ class Timer(object):
                 split = time.split(':')
                 assert type(int(split[0])) == int
                 assert type(int(split[1])) == int
+                assert int(split[1]) < 60
                 assert len(split[1]) == 2
-            return True
+            return True,
         except:
-            return False
+            return False, time
+
+    def validate(self, listo):
+        return self.validator(listo)[0]
 
     def show_times(self):
-        for time in self.times:
-            print time
+        if len(self.times) == 0:
+            print 'No times have been entered'
+        else:
+            for time in self.times:
+                print time
 
     def time_add(self,time):
         if self.validate(time):
@@ -30,11 +37,13 @@ class Timer(object):
                 for times in time:
                     self.times.append(times)
         else:
-            return 'Please enter valid time(s)'
+            return '{} is not a valid time. Please try again'.format(str(self.validator(time)[1]))
 
-    def time_remove(self, out_time):
+    def remove_time(self, out_time):
         if out_time in self.times:
             self.times.remove(out_time)
+        else:
+            print '{} has not been entered as a time'.format(out_time)
 
     def time_total(self):
         tot_mins = 0
@@ -73,7 +82,3 @@ class Timer(object):
                 return '{}:{}'.format(new_time_min, new_time_secs)
         else:
             return 'please enter valid times'
-
-
-
-
